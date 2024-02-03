@@ -1,5 +1,28 @@
-# AirBnB Clone - The Console
-The console is the first segment of the AirBnB project at Holberton School that will collectively cover fundamental concepts of higher level programming. The goal of AirBnB project is to eventually deploy our server a simple copy of the AirBnB Website(HBnB). A command interpreter is created in this segment to manage objects for the AirBnB(HBnB) website.
+<h1 align="center">HBNB - The Console</h1>
+<p align="center">An AirBnB clone.</p>
+
+<p align="center">
+  <img src="https://github.com/amxsupport/AirBnB_clone_v2/blob/master/assets/Hbnb-logo.png"
+	    alt="HBnB logo">
+</p>
+
+## Description :house:
+
+This repository contains the initial stage of a student project to build a clone of the AirBnB website. This stage implements a backend interface, or console, to manage program data. Console commands allow the user to create, update, and destroy objects, as well as manage file storage. Using a system of JSON serialization/deserialization, storage is persistent between sessions.
+
+HBnB is still in active development, with complete functionality set to
+deploy in the coming month:
+
+* Complete integration of a RESTful API
+* Full configuration of website with domain name
+* Serving of dynamic content using JavaScript
+
+<p align="center">
+  <img src="https://github.com/amxsupport/AirBnB_clone_v2/blob/master/assets/hbnb_stack.png"
+	    alt="HBnB stack">
+</p>
+
+---
 
 #### Functionalities of this command interpreter:
 * Create a new object (ex: a new User or a new Place)
@@ -156,6 +179,8 @@ No known bugs at this time.
 ## Authors
 Alexa Orrico - [Github](https://github.com/alexaorrico) / [Twitter](https://twitter.com/alexa_orrico)  
 Jennifer Huang - [Github](https://github.com/jhuang10123) / [Twitter](https://twitter.com/earthtojhuang)
+Abdelaaziz Amksa - [Github](https://github.com/amxsupport)
+Ottman Chouqar - [Github](https://github.com/Otmanbboy)
 
 Second part of Airbnb: Joann Vuong
 ## License
