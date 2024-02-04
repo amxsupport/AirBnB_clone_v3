@@ -20,3 +20,15 @@ def get_amenities():
     return jsonify(amenities_list), 200
 
 
+@app_views.route('/amenities/<amenity_id>', methods=['GET'],
+                 strict_slashes=False)
+def get_amenity(amenity_id=None):
+    """Retrieves a Amenity object with the id linked to it"""
+    amenities = storage.all('Amenity')
+    amenity = amenities.get('Amenity' + "." + amenity_id)
+    if amenity is None:
+        abort(404)
+    else:
+        return jsonify(amenity.to_dict()), 200
+
+
