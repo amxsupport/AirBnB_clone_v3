@@ -14,4 +14,20 @@ import os
 app = Flask(__name__)
 
 
+@app_views.route('/places/<place_id>/reviews', methods=['GET'],
+                 strict_slashes=False)
+def get_reviews(place_id=None):
+    """Retrieves the list of all Reviews for a place"""
+    places = storage.all('Place')
+    place = places.get('Place' + '.' + place_id)
+    if place is None:
+        abort(404)
+    reviews_list = []
+    reviews = storage.all('Review')
+    for review in reviews.values():
+        if review.place_id == place_id:
+            reviews_list.append(review.to_dict())
+    return jsonify(reviews_list), 200
+
+
 
