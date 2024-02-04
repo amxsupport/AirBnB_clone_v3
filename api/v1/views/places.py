@@ -29,4 +29,15 @@ def get_places(city_id=None):
     return jsonify(places_list), 200
 
 
+@app_views.route('/places/<place_id>', methods=['GET'],
+                 strict_slashes=False)
+def get_place(place_id=None):
+    """Retrieves a Place object with the id linked to it"""
+    place = storage.get('Place', place_id)
+    if place is None:
+        abort(404)
+    else:
+        return jsonify(place.to_dict()), 200
+
+
 
