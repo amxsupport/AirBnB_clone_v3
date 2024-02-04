@@ -30,4 +30,15 @@ def get_reviews(place_id=None):
     return jsonify(reviews_list), 200
 
 
+@app_views.route('/reviews/<review_id>', methods=['GET'],
+                 strict_slashes=False)
+def get_review(review_id=None):
+    """Retrieves a Review object with the id linked to it"""
+    review = storage.get('Review', review_id)
+    if review is None:
+        abort(404)
+    else:
+        return jsonify(review.to_dict()), 200
+
+
 
