@@ -9,6 +9,7 @@ from models.state import State
 import os
 app = Flask(__name__)
 
+
 @app_views.route('/states', methods=['GET'], strict_slashes=False)
 def get_states():
     """Retrieves the list of all State objects"""
@@ -17,6 +18,7 @@ def get_states():
     for state in states.values():
         state_list.append(state.to_dict())
     return jsonify(state_list), 200
+
 
 @app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
 def get_state(state_id=None):
@@ -27,4 +29,18 @@ def get_state(state_id=None):
         abort(404)
     else:
         return jsonify(state.to_dict()), 200
+
+
+@app_views.route('/states/<state_id>',
+                 methods=['DELETE'], strict_slashes=False)
+def delete_state(state_id=None):
+    """Deletes a State object"""
+    obj = storage.get('State', state_id)
+    if obj is None:
+        abort(404)
+    else:
+        storage.delete(obj)
+        storage.save()
+    return jsonify({}), 200
+
 
