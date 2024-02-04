@@ -10,4 +10,17 @@ import os
 app = Flask(__name__)
 
 
+@app_views.route('/places/<place_id>/amenities', methods=['GET'],
+                 strict_slashes=False)
+def get_amenity_for_place(place_id=None):
+    """Retrieves the list of all Amenity objects for a place"""
+    place_object = storage.get("Place", place_id)
+    if place_object is None:
+        return jsonify({}), 404
+    amenities_list = []
+    for amenity in place_object.amenities:
+        amenities_list.append(amenity.to_dict())
+    return jsonify(amenities_list), 200
+
+
 
