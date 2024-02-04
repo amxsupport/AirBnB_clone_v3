@@ -79,4 +79,19 @@ def post_review(place_id=None):
     return jsonify(review_obj.to_dict()), 201
 
 
+@app_views.route('/reviews/<review_id>', methods=['PUT'], strict_slashes=False)
+def put_review(review_id=None):
+    """Updates a Review object"""
+    review_obj = storage.get('Review', review_id)
+    if review_obj is None:
+        abort(404)
+    result = request.get_json()
+    if result is None:
+        return jsonify({"error": "Not a JSON"}), 400
+    invalid_keys = ["id", "user_id", "place_id", "created_at", "updated_at"]
+    for key, value in result.items():
+        if key not in invalid_keys:
+            setattr(review_obj, key, value)
+    storage.save()
+    return jsonify(review_obj.to_dict()), 200
 
