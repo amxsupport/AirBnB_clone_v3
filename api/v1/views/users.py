@@ -32,3 +32,16 @@ def get_user(user_id=None):
         return jsonify(user.to_dict()), 200
 
 
+@app_views.route('/users/<user_id>',
+                 methods=['DELETE'], strict_slashes=False)
+def delete_user(user_id=None):
+    """Deletes a User object"""
+    obj = storage.get('User', user_id)
+    if obj is None:
+        abort(404)
+    else:
+        storage.delete(obj)
+        storage.save()
+    return jsonify({}), 200
+
+
