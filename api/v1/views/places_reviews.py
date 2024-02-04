@@ -41,4 +41,17 @@ def get_review(review_id=None):
         return jsonify(review.to_dict()), 200
 
 
+@app_views.route('/reviews/<review_id>',
+                 methods=['DELETE'], strict_slashes=False)
+def delete_review(review_id=None):
+    """Deletes a Review object"""
+    obj = storage.get('Review', review_id)
+    if obj is None:
+        abort(404)
+    else:
+        storage.delete(obj)
+        storage.save()
+    return jsonify({}), 200
+
+
 
