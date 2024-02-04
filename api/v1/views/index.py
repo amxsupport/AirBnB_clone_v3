@@ -21,3 +21,13 @@ def status():
                    })
 
 
+@app_views.route('/stats')
+def stat():
+    class_dict = {"amenities": "Amenity", "cities": "City", "places": "Place",
+                  "reviews": "Review", "states": "State", "users": "User"}
+    for key in class_dict:
+        class_dict[key] = storage.count(class_dict[key])
+    return jsonify(class_dict)
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000)
