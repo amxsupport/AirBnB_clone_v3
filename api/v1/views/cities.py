@@ -28,3 +28,14 @@ def get_cities(state_id=None):
     return jsonify(city_list), 200
 
 
+@app_views.route('/cities/<city_id>', methods=['GET'], strict_slashes=False)
+def get_city(city_id=None):
+    """Retrieves a City object with the id linked to it"""
+    city_dict = storage.all('City')
+    city = city_dict.get('City' + "." + city_id)
+    if city is None:
+        abort(404)
+    else:
+        return jsonify(city.to_dict()), 200
+
+
