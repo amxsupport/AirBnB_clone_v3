@@ -63,3 +63,19 @@ def post_user():
     return jsonify(obj.to_dict()), 201
 
 
+@app_views.route('/users/<user_id>', methods=['PUT'],
+                 strict_slashes=False)
+def put_user(user_id=None):
+    """Updates a User object"""
+    result = request.get_json()
+    if not result:
+        abort(400, {"Not a JSON"})
+    obj = storage.get('User', user_id)
+    if obj is None:
+        abort(404)
+    invalid_keys = ["id", "email", "created_at", "updated_at"]
+    for key, value in result.items():
+        if key not in invalid_keys:
+            setattr(obj, key, value)
+    storage.save()
+    return jsonify(obj.to_dict()), 200
