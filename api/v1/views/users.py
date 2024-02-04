@@ -20,3 +20,15 @@ def get_users():
     return jsonify(users_list), 200
 
 
+@app_views.route('/users/<user_id>', methods=['GET'],
+                 strict_slashes=False)
+def get_user(user_id=None):
+    """Retrieves a User object with the id linked to it"""
+    users = storage.all('User')
+    user = users.get('User' + "." + user_id)
+    if user is None:
+        abort(404)
+    else:
+        return jsonify(user.to_dict()), 200
+
+
