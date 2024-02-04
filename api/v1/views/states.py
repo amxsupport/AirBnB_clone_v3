@@ -18,3 +18,13 @@ def get_states():
         state_list.append(state.to_dict())
     return jsonify(state_list), 200
 
+@app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
+def get_state(state_id=None):
+    """Retrieves a State object with the id linked to it"""
+    state_dict = storage.all('State')
+    state = state_dict.get('State' + "." + state_id)
+    if state is None:
+        abort(404)
+    else:
+        return jsonify(state.to_dict()), 200
+
