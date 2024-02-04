@@ -41,4 +41,20 @@ def delete_amenity_to_place(place_id=None, amenity_id=None):
     return jsonify({}), 200
 
 
-
+@app_views.route('/places/<place_id>/amenities/<amenity_id>', methods=['POST'],
+                 strict_slashes=False)
+def post_amenity_to_place(place_id=None, amenity_id=None):
+    """Links an Amenity object to a Place"""
+    place_obj = storage.get('Place', place_id)
+    if place_obj is None:
+        abort(404)
+    amenity_obj = storage.get('Amenity', amenity_id)
+    if amenity_obj is None:
+        abort(404)
+    amenity_ids = []
+    for amenity in place_obj.amenities:
+        if amenity.id == amenity_obj.id:
+            return jsonify(amenity_object.to_dict()), 200
+    place_obj.amenities.append(amenity_obj)
+    storage.save()
+    return jsonify(amenity_object.to_dict()), 201
