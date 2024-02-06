@@ -14,6 +14,7 @@ from models.user import User
 
 app = Flask(__name__)
 
+
 @app_views.route('/status')
 def status():
     return jsonify({
